@@ -1,11 +1,7 @@
 var mongoose = require('mongoose');
+const connectionString = process.env.MONGODB_URI || 'mongodb://localhost:27017/TodoApp';
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/TodoApp').then(() => {
-  //console.log('Connected to MongoDB Server.');
-},
-err => {
-  //console.log('Mongodb connection error: ', err);
-});
+mongoose.connect(connectionString);
 
 module.exports = {mongoose};
