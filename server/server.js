@@ -4,11 +4,10 @@ const _ = require('lodash');
 const express = require('express');
 const bodyParser = require('body-parser');
 const {ObjectId} = require('mongodb');
-
-var {mongoose} = require('./config/mongoose');
-var {User} = require('./models/User');
-var {Todo} = require('./models/Todo');
-var {authenticate} = require('./middleware/authenticate');
+const {mongoose} = require('./config/mongoose');
+const {User} = require('./models/User');
+const {Todo} = require('./models/Todo');
+const {authenticate} = require('./middleware/authenticate');
 
 var app = express();
 

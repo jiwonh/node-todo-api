@@ -1,26 +1,13 @@
 const expect = require('expect');
 const request = require('supertest');
-const {app} = require('../server');
-const {Todo} = require('../models/Todo');
+const {app} = require('./../server');
+const {Todo} = require('./../models/Todo');
 const {ObjectId} = require('mongodb');
-
-// dummy todos for seed
-const todos = [{
-  _id: new ObjectId(),
-  text: 'First test todo'
-}, {
-  _id: new ObjectId(),
-  text: 'Second test todo',
-  completed: false,
-  completedAt: null
-}]
+const {todos, populateTodos, users, populateUsers} = require('./seed/seed');
 
 // remove todos in mongodb and add seed data to mongodb
-beforeEach((done) => {
-  Todo.remove({}).then(() => {
-    return Todo.insertMany(todos);
-  }).then(() => done());
-});
+beforeEach(populateTodos);
+beforeEach(populateUsers);
 
 describe('POST /todos', () => {
   it('should create a new todo', (done) => {
