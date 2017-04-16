@@ -8,6 +8,7 @@ const {ObjectId} = require('mongodb');
 var {mongoose} = require('./config/mongoose');
 var {User} = require('./models/User');
 var {Todo} = require('./models/Todo');
+var {authenticate} = require('./middleware/authenticate');
 
 var app = express();
 
@@ -118,6 +119,10 @@ app.post('/users', (req, res) => {
   }).catch((err) => {
     res.status(400).send(err);
   });
+});
+
+app.get('/users/me', authenticate, (req, res) => {
+  res.send(req.user);
 });
 
 app.listen(port, () => {
