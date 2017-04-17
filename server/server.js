@@ -139,8 +139,6 @@ app.post('/users/login', (req, res) => {
 
 app.delete('/users/me/token', authenticate, (req, res) => {
   req.user.removeToken(req.token).then(() => {
-    // req.user = undefined;
-    // req.token = undefined;
     res.status(200).end();
   }, (err) => {
     res.status(400).end();
