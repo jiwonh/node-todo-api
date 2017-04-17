@@ -286,7 +286,8 @@ describe('POST /users/login', () => {
         }
 
         User.findOne({email}).then((user) => {
-          expect(user.tokens[0]).toInclude({
+          var lastTokenIndex = user.tokens.length - 1;
+          expect(user.tokens[lastTokenIndex]).toInclude({
             access: 'auth',
             token: res.headers['x-auth']
           });
