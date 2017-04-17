@@ -74,6 +74,29 @@ userSchema.statics.findByToken = function (token) {
   });
 };
 
+userSchema.statics.findByCredentials = function (email, password) {
+  var User = this;
+
+  return User.findOne({email}).then((user) => {
+    if (!user) {
+      return Promise.reject();
+    }
+
+    return new Promise((resolve, reject) => {
+      bcrypt.compare(password, user.password, (err, result) => {
+        if (result) {
+          resolve(user);
+        } else {
+          reject();
+        }
+      });
+    });
+
+  }).catch((err) => {
+    return Promise.reject();
+  });
+};
+
 // mongoose builtin middelware pre() setup for save event
 userSchema.pre('save', function (next) {
   var user = this;
