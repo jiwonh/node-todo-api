@@ -20,18 +20,18 @@ const users = [{
   _id: userOneId,
   email: 'jiwon@example.com',
   password: 'userOnePass',
-  tokens: {
+  tokens: [{
     access: 'auth',
     token: jwt.sign({_id: userOneId, access: 'auth'}, 'my secret').toString()
-  }
+  }]
 }, {
   _id: userTwoId,
   email: 'jan@example.com',
   password: 'userTwoPass',
-  tokens: {
+  tokens: [{
     access: 'auth',
     token: jwt.sign({_id: userTwoId, access: 'auth'}, 'my secret').toString()
-  }
+  }]
 }];
 
 const populateTodos = (done) => {
